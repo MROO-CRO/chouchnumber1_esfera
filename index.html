@@ -3,203 +3,472 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Скоро здесь появится сайт школы</title>
-
-<!-- ===== ЗНАЧОК САЙТА (FAVICON) ===== -->
-<!-- Вариант 1: SVG-иконка прямо в коде (работает без файлов) -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23a8e0ff'/%3E%3Cstop offset='1' stop-color='%234aa3e0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230b1e3a'/%3E%3Cpath d='M32 12 L54 24 L32 36 L10 24 Z' fill='url(%23g)'/%3E%3Cpath d='M18 30 L18 44 Q32 54 46 44 L46 30' stroke='%23a8e0ff' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
-<!-- Вариант 2 (запасной для старых браузеров): -->
-<link rel="alternate icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1e3a'/%3E%3Cpath d='M32 12 L54 24 L32 36 L10 24 Z' fill='%23a8e0ff'/%3E%3Cpath d='M18 30 L18 44 Q32 54 46 44 L46 30' stroke='%23a8e0ff' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
-<!-- =================================== -->
-
+<title>ЧОУ СШ №1</title>
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  :root {
+    --sky: #e3f2fb;
+    --sky2: #d0e8f7;
+    --blue: #5aa9d6;
+    --deep: #2f6d94;
+    --text: #233b4d;
+    --white: #ffffff;
   }
-
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: var(--text);
+    background: linear-gradient(135deg, var(--sky), var(--sky2));
     min-height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #0b1e3a 0%, #102a4c 50%, #08152a 100%);
-    font-family: "Segoe UI", Arial, sans-serif;
-    overflow: hidden;
-    position: relative;
+    flex-direction: column;
   }
-
-  /* Плавающие пузырьки на фоне */
-  .bubble {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(160, 220, 255, 0.15);
-    animation: floatUp linear infinite;
-    pointer-events: none;
-  }
-
-  @keyframes floatUp {
-    0% {
-      transform: translateY(100vh) scale(0.6);
-      opacity: 0;
-    }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% {
-      transform: translateY(-10vh) scale(1.2);
-      opacity: 0;
-    }
-  }
-
-  .container {
-    text-align: center;
-    padding: 40px 25px;
-    position: relative;
-    z-index: 2;
-    animation: fadeIn 1.5s ease-out;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Анимированный градиент в заголовке */
-  .title {
-    font-size: clamp(1.6rem, 5vw, 3.2rem);
-    font-weight: 800;
-    letter-spacing: 2px;
-    line-height: 1.35;
-    text-transform: uppercase;
-    background: linear-gradient(90deg, #a8e0ff, #d6f2ff, #a8e0ff, #e6f9ff, #a8e0ff);
-    background-size: 300% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: shine 6s linear infinite;
-    text-shadow: 0 0 30px rgba(168, 224, 255, 0.25);
-    margin-bottom: 10px;
-  }
-
-  @keyframes shine {
-    0%   { background-position: 0% 50%; }
-    100% { background-position: 300% 50%; }
-  }
-
-  .school-name {
-    display: block;
-    margin-top: 18px;
-    font-size: clamp(1rem, 3vw, 1.6rem);
-    font-weight: 600;
-    color: #bfe9ff;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    opacity: 0;
-    animation: fadeInUp 1.2s ease-out 0.8s forwards;
-  }
-
-  .line {
-    width: 0;
-    height: 2px;
-    margin: 28px auto;
-    background: linear-gradient(90deg, transparent, #a8e0ff, transparent);
-    animation: growLine 1.8s ease-out 1s forwards;
-  }
-
-  @keyframes growLine {
-    to { width: min(400px, 80vw); }
-  }
-
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Кнопка */
-  .btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 16px 42px;
-    font-size: clamp(0.95rem, 2.5vw, 1.15rem);
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #0b1e3a;
-    background: linear-gradient(135deg, #a8e0ff, #d6f2ff);
-    border-radius: 50px;
-    box-shadow: 0 0 20px rgba(168, 224, 255, 0.45), 0 0 60px rgba(168, 224, 255, 0.2);
-    transition: all 0.35s ease;
-    opacity: 0;
-    animation: fadeInUp 1.2s ease-out 1.6s forwards, pulse 2.5s ease-in-out 2.8s infinite;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 0 35px rgba(168, 224, 255, 0.8), 0 0 90px rgba(168, 224, 255, 0.4);
-    background: linear-gradient(135deg, #d6f2ff, #ffffff);
-  }
-
-  .btn:active {
-    transform: translateY(-1px) scale(0.98);
-  }
-
-  /* Блик по кнопке */
-  .btn::after {
-    content: "";
-    position: absolute;
+  
+  /* Шапка */
+  header {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 14px rgba(47,109,148,0.12);
+    position: sticky;
     top: 0;
-    left: -80%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.9), transparent);
-    transform: skewX(-25deg);
-    animation: glare 3s ease-in-out 3s infinite;
+    z-index: 100;
   }
-
-  @keyframes glare {
-    0%   { left: -80%; }
-    25%  { left: 130%; }
-    100% { left: 130%; }
+  .nav {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
   }
+  .logo { font-weight: 700; font-size: 1.15rem; color: var(--deep); }
+  .logo span { color: var(--blue); }
+  nav ul { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; }
+  nav a {
+    text-decoration: none;
+    color: var(--deep);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: .95rem;
+    transition: background .3s, color .3s;
+    cursor: pointer;
+  }
+  nav a:hover { background: var(--sky); color: var(--blue); }
+  nav a.active { background: var(--blue); color: #fff; }
 
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 20px rgba(168, 224, 255, 0.45), 0 0 60px rgba(168, 224, 255, 0.2); }
-    50%      { box-shadow: 0 0 35px rgba(168, 224, 255, 0.75), 0 0 90px rgba(168, 224, 255, 0.35); }
+  /* Контейнер контента */
+  main {
+    flex: 1;
+    max-width: 1100px;
+    width: 100%;
+    margin: auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Анимация появления страниц */
+  .page { display: none; animation: fadeUp .5s ease both; width: 100%; }
+  .page.active { display: flex; flex-direction: column; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+  h1 { font-size: 2.2rem; color: var(--deep); margin-bottom: 16px; line-height: 1.2; }
+  h2 { font-size: 1.7rem; color: var(--deep); margin-bottom: 22px; display: inline-block; position: relative; }
+  h2::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 60%; height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--blue), var(--sky2)); }
+
+  /* Кнопки общего назначения */
+  .btn {
+    display: inline-block; padding: 12px 28px; border-radius: 30px;
+    background: linear-gradient(135deg, var(--blue), var(--deep));
+    color: #fff; text-decoration: none; font-weight: 600; border: none; cursor: pointer;
+    transition: transform .3s, box-shadow .3s; text-align: center;
+  }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(47,109,148,0.3); }
+
+  /* --- СТРАНИЦА: ГЛАВНАЯ --- */
+  .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
+  .hero p { font-size: 1.05rem; margin-bottom: 24px; }
+  .hero-art {
+    height: 240px; border-radius: 24px;
+    background: linear-gradient(135deg, var(--sky2), var(--white));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; box-shadow: 0 12px 30px rgba(90,169,214,0.22);
+    animation: float 5s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 36px; }
+  .card {
+    background: var(--white); border-radius: 18px; padding: 22px;
+    box-shadow: 0 6px 18px rgba(47,109,148,0.1); transition: transform .3s, box-shadow .3s;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 12px 26px rgba(47,109,148,0.18); }
+  .card h3 { color: var(--blue); margin-bottom: 8px; font-size: 1.1rem; }
+
+  /* --- СТРАНИЦА: ВАКАНСИИ --- */
+  .director-banner {
+    background: var(--white); border-radius: 18px; padding: 25px 20px; margin-bottom: 30px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-shadow: 0 6px 18px rgba(47,109,148,0.1); gap: 15px; text-align: center;
+    position: relative;
+  }
+  .arrow-up { font-size: 2rem; color: var(--blue); margin-bottom: -5px; animation: bounceUp 1.5s infinite; }
+  @keyframes bounceUp { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @keyframes pulseText { 0% { transform: scale(1); color: var(--deep); } 50% { transform: scale(1.05); color: var(--blue); } 100% { transform: scale(1); color: var(--deep); } }
+  .director-title { font-size: 1.3rem; font-weight: 700; animation: pulseText 3s infinite; }
+  .btn-vk { background: linear-gradient(135deg, #0077FF, #0055cc); padding: 12px 30px; border-radius: 30px; color: #fff; text-decoration: none; font-weight: 700; font-size: 1.1rem; transition: transform .3s, box-shadow .3s; display: inline-block; }
+  .btn-vk:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 25px rgba(0,119,255,0.5); }
+  
+  .empty-vacancies {
+    background: var(--white); border-radius: 18px; padding: 40px 20px;
+    text-align: center; box-shadow: 0 6px 18px rgba(47,109,148,0.1);
+    border: 2px dashed var(--sky2); color: var(--deep);
+  }
+  .empty-vacancies h3 { font-size: 1.4rem; margin-bottom: 10px; color: var(--blue); }
+  .empty-vacancies p { font-size: 1rem; color: #5a7891; }
+
+  /* --- СТРАНИЦА: КОНТАКТЫ --- */
+  .contacts-grid { display: grid; grid-template-columns: 1fr; gap: 32px; max-width: 600px; margin: 0 auto; }
+  .contact-item { display: flex; gap: 14px; margin-bottom: 16px; align-items: center; }
+  .contact-icon { width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; background: linear-gradient(135deg, var(--sky2), var(--white)); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+
+  /* --- СТРАНИЦА: ОБРАЩЕНИЕ --- */
+  .appeal-form-container {
+    background: var(--white); border-radius: 24px; padding: 35px; 
+    box-shadow: 0 10px 30px rgba(47,109,148,0.15); max-width: 700px; margin: 0 auto; width: 100%;
+  }
+  .appeal-form-container p { margin-bottom: 20px; color: #5a7891; font-size: 0.95rem; }
+  .appeal-form { display: grid; gap: 15px; }
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-group label { font-weight: 600; font-size: 0.9rem; color: var(--deep); }
+  .form-group input, .form-group select, .form-group textarea {
+    padding: 12px 15px; border: 1.5px solid var(--sky2); border-radius: 12px;
+    font-family: inherit; font-size: 1rem; background: #fff; transition: border .3s, box-shadow .3s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(90,169,214,0.18);
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .btn-submit-appeal { margin-top: 10px; width: 100%; font-size: 1.1rem; padding: 15px; }
+
+  /* --- СТРАНИЦА: МОЕ ОБРАЗОВАНИЕ --- */
+  .esfera-header { text-align: center; margin-bottom: 20px; display: flex; flex-direction: column; align-items: center; }
+  .esfera-logo { width: 100px; height: 100px; object-fit: contain; margin-bottom: 10px; animation: float 4s ease-in-out infinite; }
+  .links-section { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 30px; width: 100%; }
+  .btn-main-site {
+    display: inline-block; padding: 15px 35px; font-size: 1.2rem; font-weight: 800; letter-spacing: 1px;
+    color: #fff; text-decoration: none; border-radius: 50px;
+    background: linear-gradient(270deg, #2f6d94, #5aa9d6, #2f6d94); background-size: 200% 200%;
+    animation: gradientMove 3s ease infinite, pulseGlow 2s infinite alternate;
+    transition: transform 0.3s;
+  }
+  .btn-main-site:hover { transform: translateY(-4px) scale(1.02); }
+  @keyframes gradientMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+  @keyframes pulseGlow { from { box-shadow: 0 10px 25px rgba(47, 109, 148, 0.3); } to { box-shadow: 0 10px 35px rgba(90, 169, 214, 0.7); } }
+  .btn-login { display: inline-block; padding: 10px 28px; font-size: 1rem; font-weight: 600; color: var(--deep); text-decoration: none; border-radius: 30px; background: var(--white); border: 2px solid var(--blue); transition: all 0.3s; }
+  .btn-login:hover { background: var(--blue); color: #fff; transform: translateY(-3px); }
+
+  .role-switch { display: flex; gap: 15px; margin-bottom: 30px; justify-content: center; }
+  .role-btn { padding: 10px 25px; font-size: 1rem; font-weight: 600; cursor: pointer; background: var(--white); color: var(--deep); border: 2px solid var(--sky2); border-radius: 30px; transition: all 0.3s; }
+  .role-btn:hover { border-color: var(--blue); color: var(--blue); }
+  .role-btn.active { background: linear-gradient(135deg, var(--blue), var(--deep)); color: #fff; border-color: transparent; box-shadow: 0 8px 20px rgba(47,109,148,0.3); }
+
+  .tab-content { width: 100%; display: none; animation: fadeIn 0.4s ease; }
+  .tab-content.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
+  .benefit-card { background: var(--white); border-radius: 18px; padding: 20px; box-shadow: 0 6px 18px rgba(47,109,148,0.1); transition: transform 0.3s; }
+  .benefit-card:hover { transform: translateY(-3px); }
+  .benefit-card h4 { color: var(--blue); margin-bottom: 10px; font-size: 1.1rem; }
+
+  /* --- БЛОК С ВИДЕО (АНИМИРОВАННЫЙ) --- */
+  .video-promo-box {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    border-radius: 24px; padding: 40px 20px; text-align: center; color: #fff;
+    box-shadow: 0 15px 35px rgba(30, 60, 114, 0.4); position: relative; overflow: hidden; margin-top: 20px;
+  }
+  .video-promo-box::before {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    animation: rotateBg 10s linear infinite; pointer-events: none;
+  }
+  @keyframes rotateBg { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  .video-promo-box h3 { font-size: 1.6rem; margin-bottom: 10px; position: relative; z-index: 1; }
+  .video-promo-box p { font-size: 1rem; margin-bottom: 25px; opacity: 0.9; position: relative; z-index: 1; }
+  .btn-video {
+    display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #2a5298;
+    padding: 15px 35px; border-radius: 50px; font-size: 1.1rem; font-weight: 700; text-decoration: none;
+    position: relative; z-index: 1; transition: all 0.3s ease; animation: pulseBtn 2s infinite;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  .btn-video:hover { transform: scale(1.05) translateY(-3px); box-shadow: 0 10px 25px rgba(255,255,255,0.4); }
+  @keyframes pulseBtn { 0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); } }
+  .play-icon { font-size: 1.5rem; display: inline-block; animation: wiggle 2s ease-in-out infinite; }
+  @keyframes wiggle { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-10deg); } 75% { transform: rotate(10deg); } }
+
+  /* Подвал */
+  footer { background: var(--deep); color: var(--sky); text-align: center; padding: 18px 20px; font-size: .85rem; margin-top: auto; }
+
+  /* Приветственное окно */
+  .welcome-overlay { position: fixed; inset: 0; z-index: 999; background: rgba(35,59,77,0.45); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 20px; animation: fadeIn .4s ease both; }
+  .welcome-overlay.hide { animation: fadeOut .4s ease both; pointer-events: none; }
+  @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+  .welcome-box { background: linear-gradient(135deg, var(--white), var(--sky)); border-radius: 24px; padding: 40px 36px; max-width: 460px; width: 100%; text-align: center; box-shadow: 0 20px 50px rgba(47,109,148,0.3); animation: popIn .5s cubic-bezier(.2,1.2,.4,1) both; }
+  @keyframes popIn { from { opacity: 0; transform: scale(.85); } to { opacity: 1; transform: scale(1); } }
+  .welcome-box .emoji { font-size: 3rem; margin-bottom: 12px; display: block; animation: float 4s ease-in-out infinite; }
+  .welcome-box h2 { font-size: 1.4rem; color: var(--deep); margin-bottom: 12px; display: block; }
+  .welcome-box h2::after { display: none; }
+  .welcome-box p { font-size: .98rem; color: var(--text); margin-bottom: 24px; }
+  .welcome-box .btn { width: 100%; }
+
+  /* Адаптив */
+  @media(max-width: 760px) {
+    .hero, .contacts-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 1.7rem; }
+    nav ul { width: 100%; justify-content: center; margin-top: 10px; }
+    .role-switch { flex-direction: column; width: 100%; }
+    .role-btn { width: 100%; }
+    .btn-main-site { font-size: 1rem; padding: 12px 20px; }
+    .appeal-form-container { padding: 20px; }
   }
 </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1 class="title">
-      Скоро здесь появится<br>сайт школы
-      <span class="school-name">ЧОУ СШ №1</span>
-    </h1>
-    <div class="line"></div>
-    <a class="btn" href="https://vk.ru/demias2026" target="_blank" rel="noopener noreferrer">
-      Написать директору в ВК
-    </a>
+<!-- ПРИВЕТСТВЕННОЕ ОКНО -->
+<div class="welcome-overlay" id="welcome">
+  <div class="welcome-box">
+    <span class="emoji">🎓</span>
+    <h2>Приветствуем на официальном сайте школы ЧОУ СШ №1</h2>
+    <p>Здесь вы найдёте информацию о школе, вакансиях, контактах и электронном журнале/дневнике.</p>
+    <button class="btn" onclick="closeWelcome()">Войти на сайт</button>
+  </div>
+</div>
+
+<!-- ШАПКА С МЕНЮ -->
+<header>
+  <div class="nav">
+    <div class="logo">ЧОУ <span>СШ №1</span></div>
+    <nav>
+      <ul>
+        <li><a href="#" class="active" onclick="showPage('page-home', this)">Главная</a></li>
+        <li><a href="#" onclick="showPage('page-jobs', this)">Вакансии</a></li>
+        <li><a href="#" onclick="showPage('page-appeal', this)">Обращение</a></li>
+        <li><a href="#" onclick="showPage('page-contacts', this)">Контакты</a></li>
+        <li><a href="#" onclick="showPage('page-edu', this)">МОЕ ОБРАЗОВАНИЕ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ГЛАВНАЯ -->
+  <div id="page-home" class="page active">
+    <div class="hero">
+      <div>
+        <h1>Добро пожаловать в ЧОУ СШ №1</h1>
+        <p>Частное общеобразовательное учреждение «Средняя школа №1» — пространство, где каждый ученик раскрывает свой потенциал.</p>
+        <button class="btn" onclick="document.querySelectorAll('nav a')[4].click()">Перейти в МОЕ ОБРАЗОВАНИЕ</button>
+      </div>
+      <div class="hero-art">🎓</div>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>📚 Качественное обучение</h3><p>Опытные педагоги и современные программы.</p></div>
+      <div class="card"><h3>🏫 Уютная атмосфера</h3><p>Просторные классы и зоны отдыха.</p></div>
+      <div class="card"><h3>💻 Электронный дневник</h3><p>Успеваемость и задания всегда под рукой.</p></div>
+    </div>
   </div>
 
+  <!-- ВАКАНСИИ -->
+  <div id="page-jobs" class="page">
+    <h2>Вакансии</h2>
+    <div class="director-banner">
+      <div class="arrow-up">⬆️</div>
+      <div class="director-title">Написать директору школы</div>
+      <a href="https://vk.ru/demias2026" target="_blank" class="btn-vk">Написать в ВК</a>
+    </div>
+    <div class="empty-vacancies">
+      <h3>Вакансии пока не добавлены</h3>
+      <p>В данный момент открытых вакансий нет. Пожалуйста, загляните позже или напишите нам!</p>
+    </div>
+  </div>
+
+  <!-- ОБРАЩЕНИЕ (НОВАЯ СТРАНИЦА) -->
+  <div id="page-appeal" class="page">
+    <h2>Обращение к школе</h2>
+    <div class="appeal-form-container">
+      <p>Здесь вы можете оставить официальное обращение, предложение или жалобу. Заполните все поля, и после отправки откроется ваша почтовая программа с уже готовым письмом на почту школы.</p>
+      
+      <form class="appeal-form" id="appealForm" onsubmit="submitAppeal(event)">
+        <div class="form-group">
+          <label>Ваше ФИО *</label>
+          <input type="text" id="appealName" placeholder="Иванов Иван Иванович" required>
+        </div>
+        <div class="form-group">
+          <label>Ваш Email для ответа *</label>
+          <input type="email" id="appealEmail" placeholder="example@mail.ru" required>
+        </div>
+        <div class="form-group">
+          <label>Тип обращения *</label>
+          <select id="appealType" required>
+            <option value="">Выберите тип</option>
+            <option value="Предложение">Предложение</option>
+            <option value="Жалоба">Жалоба</option>
+            <option value="Благодарность">Благодарность</option>
+            <option value="Вопрос">Вопрос</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Кому адресовано (если знаете)</label>
+          <input type="text" id="appealTo" placeholder="Директору, классному руководителю...">
+        </div>
+        <div class="form-group">
+          <label>Текст обращения *</label>
+          <textarea id="appealText" placeholder="Опишите вашу ситуацию или предложение..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-submit-appeal">Отправить обращение</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- КОНТАКТЫ (без карты и формы) -->
+  <div id="page-contacts" class="page">
+    <h2>Контакты</h2>
+    <div class="contacts-grid">
+      <div>
+        <div class="contact-item"><div class="contact-icon">📍</div><div><strong>Адрес</strong><br>проспект Школьная, 1</div></div>
+        <div class="contact-item"><div class="contact-icon">📞</div><div><strong>Телефон</strong><br>89746653444</div></div>
+        <div class="contact-item"><div class="contact-icon">✉️</div><div><strong>Email</strong><br>shool1s@mail.ru</div></div>
+        <div class="contact-item"><div class="contact-icon">🕐</div><div><strong>Режим работы</strong><br>Пн–Пт: 8:00–18:00</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- МОЕ ОБРАЗОВАНИЕ -->
+  <div id="page-edu" class="page">
+    <div class="esfera-header">
+      <img src="images/logo.png" alt="ESFERA Логотип" class="esfera-logo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'45\' fill=\'%23fff\' stroke=\'%231f2a5e\' stroke-width=\'8\'/><text x=\'50\' y=\'72\' font-size=\'65\' font-family=\'sans-serif\' font-weight=\'bold\' font-style=\'italic\' text-anchor=\'middle\' fill=\'%231f2a5e\'>e</text></svg>'">
+      <div style="font-size: 1.8rem; color: #1f2a5e; font-weight: 800; letter-spacing: 2px;">ESFERA</div>
+      <p style="color:var(--deep); margin-top:5px; font-size:1rem;">Электронный дневник и журнал</p>
+    </div>
+
+    <div class="links-section">
+      <a href="https://есфера.рф/" target="_blank" class="btn-main-site">Перейти на сайт ЕСФЕРА</a>
+      <a href="https://есфера.рф/login" target="_blank" class="btn-login">Вход в портал</a>
+    </div>
+
+    <div class="role-switch">
+      <button class="role-btn active" onclick="switchRole('student', this)">Я ученик / родитель</button>
+      <button class="role-btn" onclick="switchRole('teacher', this)">Я учитель</button>
+    </div>
+
+    <!-- Вкладка Ученик -->
+    <div id="student" class="tab-content active">
+      <h3 style="color:var(--deep); margin-bottom:15px; text-align:center;">Преимущества для учеников</h3>
+      <div class="benefits-grid">
+        <div class="benefit-card"><h4>📊 Оценки онлайн</h4><p>Смотрите текущие оценки и итоговые результаты в реальном времени.</p></div>
+        <div class="benefit-card"><h4>📚 Домашние задания</h4><p>Все задания и расписание всегда под рукой.</p></div>
+      </div>
+    </div>
+
+    <!-- Вкладка Учитель -->
+    <div id="teacher" class="tab-content">
+      <h3 style="color:var(--deep); margin-bottom:15px; text-align:center;">Панель учителя</h3>
+      
+      <div class="benefits-grid">
+        <div class="benefit-card" style="cursor:pointer;" onclick="alert('Открыто окно выставления оценок')">
+          <h4>✍️ Выставить оценки</h4>
+          <p>Быстрое заполнение журнала и выставление баллов.</p>
+        </div>
+        <div class="benefit-card" style="cursor:pointer;" onclick="alert('Открыто окно выдачи Домашнего Задания')">
+          <h4>📚 Выдать ДЗ</h4>
+          <p>Записать задания на следующий урок.</p>
+        </div>
+        <div class="benefit-card" style="cursor:pointer;" onclick="alert('Открыто окно выдачи Цифрового ДЗ')">
+          <h4>💻 Выдать ЦДЗ</h4>
+          <p>Отправить ссылки на тесты и платформы.</p>
+        </div>
+        <div class="benefit-card" style="cursor:pointer;" onclick="alert('Открыто окно аналитики')">
+          <h4>📈 Аналитика</h4>
+          <p>Успеваемость и посещаемость класса.</p>
+        </div>
+      </div>
+
+      <h3 style="color:var(--deep); margin-bottom:15px; text-align:center;">Видео-обзор журнала</h3>
+      
+      <div class="video-promo-box">
+        <h3>Видео-инструкция</h3>
+        <p>Узнайте, как легко и быстро работать с электронным журналом нашей школы.</p>
+        <a href="https://vkvideo.ru/video-242422389_456239017" target="_blank" class="btn-video">
+          <span class="play-icon">▶</span> Перейти к видео
+        </a>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>© 2024–2026 ЧОУ СШ №1 · Все права защищены</footer>
+
 <script>
-  // Генерация плавающих пузырьков
-  const body = document.body;
-  for (let i = 0; i < 18; i++) {
-    const b = document.createElement("div");
-    b.className = "bubble";
-    const size = Math.random() * 60 + 15;
-    b.style.width = size + "px";
-    b.style.height = size + "px";
-    b.style.left = Math.random() * 100 + "vw";
-    b.style.animationDuration = (Math.random() * 12 + 10) + "s";
-    b.style.animationDelay = (Math.random() * 12) + "s";
-    body.appendChild(b);
+  // Закрытие приветствия
+  function closeWelcome() {
+    const w = document.getElementById('welcome');
+    w.classList.add('hide');
+    setTimeout(() => { w.style.display = 'none'; }, 400);
+  }
+
+  // Переключение страниц
+  function showPage(pageId, navElement) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+    navElement.classList.add('active');
+  }
+
+  // Переключение ролей
+  function switchRole(role, btn) {
+    document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(role).classList.add('active');
+  }
+
+  // Логика отправки обращения
+  function submitAppeal(event) {
+    event.preventDefault(); // Останавливаем стандартную отправку формы
+
+    // Получаем значения полей
+    const name = document.getElementById('appealName').value;
+    const email = document.getElementById('appealEmail').value;
+    const type = document.getElementById('appealType').value;
+    const to = document.getElementById('appealTo').value || 'Администрации школы';
+    const text = document.getElementById('appealText').value;
+
+    // Почта школы
+    const schoolEmail = 'shool1s@mail.ru';
+    
+    // Формируем тему и тело письма
+    const subject = encodeURIComponent(`Обращение к школе: ${type}`);
+    const body = encodeURIComponent(
+      `Тип обращения: ${type}\n` +
+      `От кого: ${name}\n` +
+      `Email для ответа: ${email}\n` +
+      `Адресовано: ${to}\n\n` +
+      `Текст обращения:\n${text}`
+    );
+
+    // Формируем ссылку mailto
+    const mailtoLink = `mailto:${schoolEmail}?subject=${subject}&body=${body}`;
+
+    // Открываем почтовый клиент
+    window.location.href = mailtoLink;
+
+    // Показываем уведомление об успехе и очищаем форму
+    alert('Письмо сформировано! Ваша почтовая программа сейчас откроется. Пожалуйста, нажмите "Отправить" в ней, чтобы завершить отправку.');
+    document.getElementById('appealForm').reset();
   }
 </script>
-
 </body>
 </html>
